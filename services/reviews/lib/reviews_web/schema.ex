@@ -18,7 +18,7 @@ defmodule ReviewsWeb.Schema do
     end
 
     field :_service, :service_sdl do
-     resolve(&Resolvers.Reviews.sdl/3)
+      resolve(&Resolvers.Reviews.sdl/3)
     end
   end
 end

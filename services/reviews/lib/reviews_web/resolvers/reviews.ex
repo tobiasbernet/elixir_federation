@@ -92,9 +92,10 @@ defmodule ReviewsWeb.Resolvers.Reviews do
              schema.__absinthe_blueprint__(),
              pipeline
            ) do
-      sdl = blueprint
-      |> inspect(pretty: true)
-      |> String.replace("\"Represents a schema\"", "")
+      sdl =
+        blueprint
+        |> inspect(pretty: true)
+        |> String.replace("\"Represents a schema\"", "")
 
       {:ok, %{sdl: sdl}}
     else
