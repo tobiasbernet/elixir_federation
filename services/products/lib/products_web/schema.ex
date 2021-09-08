@@ -8,7 +8,7 @@ defmodule ProductsWeb.Schema do
 
   query do
     @desc "Get a top products"
-    field :topProducts, list_of(:product) do
+    field :top_products, list_of(:product) do
       arg(:first, non_null(:integer))
       resolve(&Resolvers.Products.get_top/3)
     end
