@@ -9,7 +9,6 @@ defmodule AccountsWeb.Schema do
   query do
     @desc "Get current user"
     field :me, :user do
-      arg(:id, non_null(:id))
       resolve(&Resolvers.User.find/3)
     end
   end
