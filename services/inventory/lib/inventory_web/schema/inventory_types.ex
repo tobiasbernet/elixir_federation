@@ -11,4 +11,8 @@ defmodule InventoryWeb.Schema.InventoryTypes do
     field(:price, non_null(:integer), do: external())
     field(:in_stock, :boolean)
   end
+
+  object :service_sdl do
+    field(:sdl, :string)
+  end
 end

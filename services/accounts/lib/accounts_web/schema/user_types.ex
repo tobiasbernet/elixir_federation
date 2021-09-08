@@ -6,4 +6,8 @@ defmodule AccountsWeb.Schema.UserTypes do
     field(:name, :string)
     field(:username, :string)
   end
+
+  object :service_sdl do
+    field(:sdl, :string)
+  end
 end

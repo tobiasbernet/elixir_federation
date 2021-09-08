@@ -2,7 +2,7 @@ defmodule ProductsWeb.Schema do
   use Absinthe.Schema
   import_types(ProductsWeb.Schema.ProductTypes)
 
-  alias InventoryWeb.Resolvers
+  alias ProductsWeb.Resolvers
 
   query do
     @desc "Get a product"

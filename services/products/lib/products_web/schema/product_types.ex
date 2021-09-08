@@ -10,4 +10,8 @@ defmodule ProductsWeb.Schema.ProductTypes do
     field(:price, non_null(:integer))
     field(:weight, non_null(:integer))
   end
+
+  object :service_sdl do
+    field(:sdl, :string)
+  end
 end

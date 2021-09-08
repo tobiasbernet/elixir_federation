@@ -12,7 +12,7 @@ defmodule AccountsWeb.Schema do
     end
 
     field :_service, :service_sdl do
-      resolve(&Resolvers.Accounts.sdl/3)
+      resolve(&Resolvers.User.sdl/3)
     end
   end
 end
