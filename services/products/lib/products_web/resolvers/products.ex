@@ -1,12 +1,11 @@
 defmodule ProductsWeb.Resolvers.Products do
-  use ExMachina
 
   def find(_parent, arg, _resolution) do
     {:ok, find_by(arg)}
   end
 
   def get_top(_parent, %{first: n}, _resolution) do
-    {:ok, Enum.take(products, n)}
+    {:ok, Enum.take(products(), n)}
   end
 
   defp find_by(%{upc: upc}) do

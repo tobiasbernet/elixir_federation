@@ -44,6 +44,7 @@ defmodule Accounts.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:absinthe, "~> 1.6"},
       {:absinthe_plug, "~> 1.4"},
+      {:absinthe_federation, "~> 0.1.0"},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_machina, "~> 2.7.0"}
     ]
