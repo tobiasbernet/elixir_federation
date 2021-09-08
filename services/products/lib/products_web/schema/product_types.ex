@@ -1,6 +1,6 @@
 defmodule ProductsWeb.Schema.ProductTypes do
   use Absinthe.Schema.Notation
-  use Absinthe.Federation.Schema
+  use Absinthe.Federation.Notation
 
   object :product do
     key_fields("upc")
@@ -9,9 +9,5 @@ defmodule ProductsWeb.Schema.ProductTypes do
     field(:weight, non_null(:integer))
     field(:price, non_null(:integer))
     field(:weight, non_null(:integer))
-  end
-
-  object :service_sdl do
-    field(:sdl, :string)
   end
 end

@@ -1,5 +1,7 @@
 defmodule ProductsWeb.Schema do
   use Absinthe.Schema
+  use Absinthe.Federation.Schema
+
   import_types(ProductsWeb.Schema.ProductTypes)
 
   alias ProductsWeb.Resolvers
@@ -15,10 +17,6 @@ defmodule ProductsWeb.Schema do
     field :product, list_of(:product) do
       arg(:first, non_null(:integer))
       resolve(&Resolvers.Products.get_top/3)
-    end
-
-    field :_service, :service_sdl do
-      resolve(&Resolvers.Products.sdl/3)
     end
   end
 end

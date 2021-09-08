@@ -30,14 +30,6 @@ defmodule ReviewsWeb.Resolvers.Reviews do
     {:ok, find_by(:upc, upc)}
   end
 
-  @doc """
-  Resolve the sdl file for apollo federation (ApolloGetServiceDefinition)
-  """
-  def sdl(_, _, _) do
-    ReviewsWeb.Schema
-    |> generate_schema()
-  end
-
   defp find_by(key, value) do
     reviews()
     |> Enum.find(fn i -> Map.get(i, key) == value end)
@@ -77,28 +69,5 @@ defmodule ReviewsWeb.Resolvers.Reviews do
       %{id: 1, username: "@ada"},
       %{id: 2, username: "@complete"}
     ]
-  end
-
-  def generate_schema(schema) do
-    pipeline =
-      schema
-      |> Absinthe.Pipeline.for_schema(prototype_schema: schema.__absinthe_prototype_schema__())
-      |> Absinthe.Pipeline.upto({Absinthe.Phase.Schema.Validation.Result, pass: :final})
-      |> Absinthe.Schema.apply_modifiers(schema)
-
-    with {:ok, blueprint, _phases} <-
-           Absinthe.Pipeline.run(
-             schema.__absinthe_blueprint__(),
-             pipeline
-           ) do
-      sdl =
-        blueprint
-        |> inspect(pretty: true)
-        |> String.replace("\"Represents a schema\"", "")
-
-      {:ok, %{sdl: sdl}}
-    else
-      _ -> {:error, "Failed to render schema"}
-    end
   end
 end

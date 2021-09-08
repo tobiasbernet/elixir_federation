@@ -1,6 +1,6 @@
 defmodule ReviewsWeb.Schema.ReviewTypes do
   use Absinthe.Schema.Notation
-  use Absinthe.Federation.Schema
+  use Absinthe.Federation.Notation
 
   object :review do
     key_fields("id")
@@ -39,9 +39,5 @@ defmodule ReviewsWeb.Schema.ReviewTypes do
     end
 
     field(:reviews, list_of(:review))
-  end
-
-  object :service_sdl do
-    field(:sdl, :string)
   end
 end

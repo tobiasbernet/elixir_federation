@@ -1,5 +1,7 @@
 defmodule ReviewsWeb.Schema do
   use Absinthe.Schema
+  use Absinthe.Federation.Schema
+
   import_types(ReviewsWeb.Schema.ReviewTypes)
 
   alias ReviewsWeb.Resolvers
@@ -15,10 +17,6 @@ defmodule ReviewsWeb.Schema do
     field :reviews, list_of(:review) do
       arg(:id, non_null(:integer))
       resolve(&Resolvers.Reviews.reviews/3)
-    end
-
-    field :_service, :service_sdl do
-      resolve(&Resolvers.Reviews.sdl/3)
     end
   end
 end
