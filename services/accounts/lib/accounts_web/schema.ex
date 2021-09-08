@@ -10,5 +10,9 @@ defmodule AccountsWeb.Schema do
       arg(:id, non_null(:id))
       resolve(&Resolvers.User.find/3)
     end
+
+    field :_service, :service_sdl do
+      resolve(&Resolvers.Accounts.sdl/3)
+    end
   end
 end
