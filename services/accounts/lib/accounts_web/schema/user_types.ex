@@ -3,7 +3,9 @@ defmodule AccountsWeb.Schema.UserTypes do
   use Absinthe.Federation.Notation
 
   object :user do
-    field(:id, :id)
+    key_fields("id")
+
+    field(:id, non_null(:id))
     field(:name, :string)
     field(:username, :string)
   end

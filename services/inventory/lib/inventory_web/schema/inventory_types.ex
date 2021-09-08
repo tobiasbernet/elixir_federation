@@ -3,12 +3,13 @@ defmodule InventoryWeb.Schema.InventoryTypes do
   use Absinthe.Federation.Notation
 
   object :product do
-    key_fields("upc")
     extends()
+    key_fields("upc")
 
     field(:upc, non_null(:string), do: external())
-    field(:weight, non_null(:integer), do: external())
-    field(:price, non_null(:integer), do: external())
+    field(:weight, :integer, do: external())
+    field(:price, :integer, do: external())
     field(:in_stock, :boolean)
+    field(:shippingEstimate,  :integer, do: requires_fields("price weight"))
   end
 end

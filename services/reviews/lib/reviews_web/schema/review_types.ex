@@ -19,13 +19,9 @@ defmodule ReviewsWeb.Schema.ReviewTypes do
     extends()
     key_fields("id")
 
-    field :id, :id do
-      external()
-    end
+    field(:id, non_null(:id), do: external())
 
-    field :username, :string do
-      external()
-    end
+    field(:username, :string, do: external())
 
     field(:reviews, list_of(:review))
   end
@@ -34,7 +30,7 @@ defmodule ReviewsWeb.Schema.ReviewTypes do
     extends()
     key_fields("upc")
 
-    field :upc, :string do
+    field(:upc, non_null(:string)) do
       external()
     end
 
