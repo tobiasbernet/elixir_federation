@@ -10,5 +10,9 @@ defmodule InventoryWeb.Schema do
       arg(:product, non_null(:string))
       resolve(&Resolvers.Inventory.find/3)
     end
+
+    field :_service, :service_sdl do
+      resolve(&Resolvers.Inventory.sdl/3)
+    end
   end
 end
