@@ -16,5 +16,9 @@ defmodule ProductsWeb.Schema do
       arg(:first, non_null(:integer))
       resolve(&Resolvers.Products.get_top/3)
     end
+
+    field :_service, :service_sdl do
+      resolve(&Resolvers.Products.sdl/3)
+    end
   end
 end

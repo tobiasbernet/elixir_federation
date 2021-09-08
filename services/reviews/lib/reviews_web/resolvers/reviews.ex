@@ -36,7 +36,6 @@ defmodule ReviewsWeb.Resolvers.Reviews do
   def sdl(_, _, _) do
     ReviewsWeb.Schema
     |> generate_schema()
-    |> IO.inspect()
   end
 
   defp find_by(key, value) do
