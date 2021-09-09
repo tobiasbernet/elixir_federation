@@ -2,22 +2,34 @@ defmodule ReviewsWeb.Resolvers.Reviews do
   use ExMachina
 
   def find(_parent, %{id: id}, _resolution) do
-    {:ok, find_by(:authorId, id)}
+    {:ok, filter_by(:authorID, id)}
+  end
+
+  def find(%{"__typename" => "User", "id" => id}, _args, _resolution) do
+    {:ok, filter_by(:authorID, String.to_integer(id))}
   end
 
   def reviews(_parent, %{id: id}, _resolution) do
-    {:ok, find_by(:authorID, id)}
+    {:ok, filter_by(:authorID, id)}
   end
 
-  def number_of_reviews(_parent, %{id: id}, _resolution) do
+  def reviews(_parent, %{}, _resolution) do
+    {:ok, reviews()}
+  end
+
+  def review(parent, _arg, _resolution) do
+    {:ok, parent}
+  end
+
+  def number_of_reviews(%{"__typename" => "User", "id" => id}, _args, _resolution) do
     n =
-      find_by(:authorID, id)
+      filter_by(:authorID, String.to_integer(id))
       |> length()
 
     {:ok, n}
   end
 
-  def username(_parent, %{id: id}, _resolution) do
+  def username(%{authorID: id}, _args, _resolution) do
     username =
       usernames()
       |> Enum.find(fn u -> u.id == id end)
@@ -27,12 +39,12 @@ defmodule ReviewsWeb.Resolvers.Reviews do
   end
 
   def product_reviews(_parent, %{upc: upc}, _resolution) do
-    {:ok, find_by(:upc, upc)}
+    {:ok, filter_by(:upc, upc)}
   end
 
-  defp find_by(key, value) do
+  defp filter_by(key, value) do
     reviews()
-    |> Enum.find(fn i -> Map.get(i, key) == value end)
+    |> Enum.filter(fn i -> Map.get(i, key) == value end)
   end
 
   defp reviews do
