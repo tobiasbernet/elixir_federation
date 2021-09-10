@@ -6,8 +6,12 @@ defmodule ProductsWeb.Resolvers.Products do
     {:ok, find_by(%{upc: upc})}
   end
 
-  def find(_parent, arg, _resolution) do
+  def find(_parent, %{upc: _upc} = arg, _resolution) do
     {:ok, find_by(arg)}
+  end
+
+  def find(_parent, %{__typename: "Product", upc: upc}, _resolution) do
+    {:ok, find_by(%{upc: upc})}
   end
 
   def get_top(_parent, %{first: n}, _resolution) do
