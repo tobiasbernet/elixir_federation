@@ -27,9 +27,9 @@ defmodule ReviewsWeb.Resolvers.Reviews do
     {:ok, parent}
   end
 
-  def number_of_reviews(%{"__typename" => "User", "id" => id}, _args, _resolution) do
+  def number_of_reviews(%{authorID: id}, _args, _resolution) do
     n =
-      filter_by(:authorID, String.to_integer(id))
+      filter_by(:authorID, id)
       |> length()
 
     {:ok, n}
