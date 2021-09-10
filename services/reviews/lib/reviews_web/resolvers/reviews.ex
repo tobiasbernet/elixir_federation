@@ -1,6 +1,4 @@
 defmodule ReviewsWeb.Resolvers.Reviews do
-
-
   defstruct [:id, :authorID, :product, :body]
 
   def find(_parent, %{id: id}, _resolution) do
@@ -15,7 +13,7 @@ defmodule ReviewsWeb.Resolvers.Reviews do
     {:ok, filter_by(product: %{upc: upc})}
   end
 
-  def reviews(_parent, %{id: id}, _resolution) do
+  def reviews(_parent, %{id: id} = args, _resolution) do
     {:ok, filter_by(:authorID, id)}
   end
 
@@ -24,10 +22,10 @@ defmodule ReviewsWeb.Resolvers.Reviews do
   end
 
   def review(parent, _arg, _resolution) do
-    {:ok, parent}
+    {:ok, %{__typename: "User", id: parent.authorID}}
   end
 
-  def number_of_reviews(%{authorID: id}, _args, _resolution) do
+  def number_of_reviews(%{__typename: "User", id: id}, _args, _resolution) do
     n =
       filter_by(:authorID, id)
       |> length()
@@ -35,7 +33,7 @@ defmodule ReviewsWeb.Resolvers.Reviews do
     {:ok, n}
   end
 
-  def username(%{authorID: id}, _args, _resolution) do
+  def username(%{__typename: "User", id: id}, _args, _resolution) do
     username =
       usernames()
       |> Enum.find(fn u -> u.id == id end)

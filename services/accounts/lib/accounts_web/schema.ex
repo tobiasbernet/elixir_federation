@@ -7,6 +7,7 @@ defmodule AccountsWeb.Schema do
   alias AccountsWeb.Resolvers
 
   query do
+    extends()
     @desc "Get current user"
     field :me, :user do
       resolve(&Resolvers.User.find/3)
