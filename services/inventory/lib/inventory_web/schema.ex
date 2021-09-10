@@ -7,9 +7,9 @@ defmodule InventoryWeb.Schema do
   alias InventoryWeb.Resolvers
 
   query do
-    @desc "Get current user"
+    @desc "Get inventory"
     field :inventory, :product do
-      arg(:product, non_null(:string))
+      arg(:upc, non_null(:string))
       resolve(&Resolvers.Inventory.find/3)
     end
   end
