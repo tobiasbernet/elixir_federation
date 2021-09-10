@@ -1,5 +1,7 @@
 defmodule ReviewsWeb.Resolvers.Reviews do
-  use ExMachina
+
+
+  defstruct [:id, :authorID, :product, :body]
 
   def find(_parent, %{id: id}, _resolution) do
     {:ok, filter_by(:authorID, id)}
@@ -58,25 +60,25 @@ defmodule ReviewsWeb.Resolvers.Reviews do
 
   defp reviews do
     [
-      %{
+      %__MODULE__{
         id: 1,
         authorID: 1,
         product: %{upc: "1"},
         body: "Love it!"
       },
-      %{
+      %__MODULE__{
         id: 2,
         authorID: 1,
         product: %{upc: "2"},
         body: "Too expensive."
       },
-      %{
+      %__MODULE__{
         id: 3,
         authorID: 2,
         product: %{upc: "3"},
         body: "Could be better."
       },
-      %{
+      %__MODULE__{
         id: 4,
         authorID: 2,
         product: %{upc: "1"},
