@@ -10,7 +10,6 @@ defmodule AccountsWeb.Resolvers.User do
     result =
       users()
       |> Enum.find(fn u -> u.id == id end)
-      |> IO.inspect()
 
     {:ok, result}
   end
