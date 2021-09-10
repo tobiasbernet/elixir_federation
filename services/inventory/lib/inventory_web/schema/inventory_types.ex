@@ -12,8 +12,10 @@ defmodule InventoryWeb.Schema.InventoryTypes do
     field(:weight, :integer, do: external())
     field(:price, :integer, do: external())
     field(:in_stock, :boolean)
-    field(:shipping_estimate,  :float) do
+
+    field(:shipping_estimate, :float) do
       requires_fields("price weight")
+
       resolve(fn parent, _args, _ -> Resolvers.Inventory.shipping_estimate(parent, _args, nil) end)
     end
   end

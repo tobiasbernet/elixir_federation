@@ -1,5 +1,4 @@
 defmodule ProductsWeb.Resolvers.Products do
-
   defstruct [:upc, :name, :price, :weight]
 
   def find(%{__typename: "Product", upc: upc}, _args, _resolution) do
