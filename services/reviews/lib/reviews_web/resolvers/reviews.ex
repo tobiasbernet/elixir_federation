@@ -9,6 +9,10 @@ defmodule ReviewsWeb.Resolvers.Reviews do
     {:ok, filter_by(:authorID, String.to_integer(id))}
   end
 
+  def find(%{"__typename" => "Product", "upc" => upc}, _args, _resolution) do
+    {:ok, filter_by(product: %{upc: upc})}
+  end
+
   def reviews(_parent, %{id: id}, _resolution) do
     {:ok, filter_by(:authorID, id)}
   end
@@ -45,6 +49,11 @@ defmodule ReviewsWeb.Resolvers.Reviews do
   defp filter_by(key, value) do
     reviews()
     |> Enum.filter(fn i -> Map.get(i, key) == value end)
+  end
+
+  defp filter_by(product: %{upc: upc}) do
+    reviews()
+    |> Enum.filter(fn i -> Map.get(i, :product) == %{upc: upc} end)
   end
 
   defp reviews do

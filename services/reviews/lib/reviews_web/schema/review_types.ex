@@ -46,6 +46,8 @@ defmodule ReviewsWeb.Schema.ReviewTypes do
       external()
     end
 
-    field(:reviews, list_of(:review))
+    field(:reviews, list_of(:review)) do
+      resolve(&Resolvers.Reviews.find/3)
+    end
   end
 end
