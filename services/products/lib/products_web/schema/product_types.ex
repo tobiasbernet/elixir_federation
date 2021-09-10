@@ -13,7 +13,7 @@ defmodule ProductsWeb.Schema.ProductTypes do
     field(:weight, :integer)
 
     field(:_resolve_reference, :product) do
-      resolve(fn _, args, _ -> Resolvers.Products.find(nil, args, nil) end)
+      resolve(fn parent, _args, _ -> Resolvers.Products.find(parent, _args, nil) end)
     end
   end
 end

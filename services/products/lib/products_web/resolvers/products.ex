@@ -2,7 +2,7 @@ defmodule ProductsWeb.Resolvers.Products do
 
   defstruct [:upc, :name, :price, :weight]
 
-  def find(_parent, %{__typename: "Product", upc: upc}, _resolution) do
+  def find(%{__typename: "Product", upc: upc}, _args, _resolution) do
     {:ok, find_by(%{upc: upc})}
   end
 
